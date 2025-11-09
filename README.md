@@ -2,6 +2,16 @@
 
 My personal dotfiles managed with [Rotz](https://github.com/volllly/rotz).
 
+## Prerequisites
+
+### All
+- JetBrainsMonoNL Nerd Font Propo
+- zoxide
+
+### Windows
+- Windows Terminal
+    - manually copy `settings.json`
+
 ## Quick Setup on New PC
 
 ### 1. Install Rotz
