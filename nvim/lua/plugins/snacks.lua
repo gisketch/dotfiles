@@ -173,13 +173,6 @@ return {
             desc = "Find Files",
         },
         {
-            "<leader>lg",
-            function()
-                Snacks.picker.grep()
-            end,
-            desc = "Live grep",
-        },
-        {
             "<leader>ps",
             function()
                 Snacks.picker.grep()

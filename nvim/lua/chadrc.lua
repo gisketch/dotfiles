@@ -136,9 +136,29 @@ M.ui = {
 					]]
         end
 
+        -- Helper to find buffer number by path
+        local function find_buf_by_path(path)
+          local normalized_path = normalize_path(path)
+          for _, bufnr in ipairs(api.nvim_list_bufs()) do
+            if api.nvim_buf_is_valid(bufnr) then
+              local buf_path = normalize_path(api.nvim_buf_get_name(bufnr))
+              if buf_path == normalized_path then
+                return bufnr
+              end
+            end
+          end
+          return nil
+        end
+
         -- Helper to create a tab entry
-        local function create_tab(path, index, is_active)
+        local function create_tab(path, index, is_active, bufnr)
           local tbHlName = "BufO" .. (is_active and "n" or "ff")
+
+          -- Check if buffer is modified
+          local is_modified = false
+          if bufnr and api.nvim_buf_is_valid(bufnr) then
+            is_modified = api.nvim_get_option_value("modified", { buf = bufnr })
+          end
 
           -- Get file icon
           local name = filename(path)
@@ -153,19 +173,25 @@ M.ui = {
             end
           end
 
+          -- Add modified indicator
+          local modified_indicator = ""
+          if is_modified then
+            local mod_hl = is_active and "BufOnModified" or "BufOffModified"
+            modified_indicator = txt(" ", mod_hl)
+          end
           -- Calculate padding
           local w = opts.bufwidth
-          local num_width = index and 2 or 0 -- " 1 " takes 3 chars, we account for it
-          local pad = math.floor((w - #name - 3 - num_width) / 2)
+          local num_width = index and 2 or 0 -- " 1 " takes 3 chars
+          local mod_width = is_modified and 2 or 0
+          local pad = math.floor((w - #name - 3 - num_width - mod_width) / 2)
           pad = pad <= 0 and 1 or pad
 
           -- Truncate long names
-          local maxname_len = w - 3 - num_width
+          local maxname_len = w - 3 - num_width - mod_width
           name = string.sub(name, 1, maxname_len - 2) .. (#name > maxname_len and ".." or "")
-          name = txt(name, tbHlName)
 
           -- Build the tab
-          local content = string.rep(" ", pad - 1) .. icon_hl .. icon .. name .. string.rep(" ", pad - 1)
+          local content = string.rep(" ", pad - 1) .. icon_hl .. icon .. modified_indicator .. txt(name, tbHlName) .. string.rep(" ", pad - 1)
 
           if index then
             -- Grapple file: add index number and make it clickable
@@ -193,14 +219,15 @@ M.ui = {
 
         -- If current file is NOT in Grapple, show it first (no number)
         if not is_in_grapple and cur_file ~= "" then
-          table.insert(result, create_tab(cur_file, nil, true))
+          table.insert(result, create_tab(cur_file, nil, true, cur_buf))
         end
 
         -- Show all Grapple files with numbers
         for i, tag in ipairs(tags) do
           local tag_path = normalize_path(tag.path)
           local is_current = tag_path == cur_file
-          table.insert(result, create_tab(tag.path, i, is_current))
+          local tag_bufnr = find_buf_by_path(tag.path)
+          table.insert(result, create_tab(tag.path, i, is_current, tag_bufnr))
         end
 
         return table.concat(result) .. txt("%=", "Fill")

@@ -9,6 +9,10 @@ return {
             require("menu").open("main")
         end, { desc = "Open main menu" })
 
+        vim.keymap.set("n", "<leader>l", function()
+            require("menu").open("lsp")
+        end, { desc = "Open LSP menu" })
+
         -- Optional: Right-click context menu
         vim.keymap.set({ "n", "v" }, "<RightMouse>", function()
             vim.cmd.exec '"normal! \\<RightMouse>"'

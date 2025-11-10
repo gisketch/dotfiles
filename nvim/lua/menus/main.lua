@@ -9,7 +9,6 @@ return {
     end,
     rtxt = "c",
   },
-
   {
     name = " Copy All",
     cmd = function()
@@ -30,7 +29,7 @@ return {
   },
   {
     name = "󰊢 Git Signs",
-    hl = "ExPurple",
+    hl = "Keyword",
     items = "gitsigns",
     keybind = "h",
     rtxt = "h",
@@ -48,5 +47,12 @@ return {
     items = "utils",
     keybind = "t",
     rtxt = "t",
+  },
+  {
+    name = "󰈔 LSP",
+    hl = "ExGreen",
+    items = "lsp",
+    keybind = "l",
+    rtxt = "l",
   },
 }

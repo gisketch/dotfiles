@@ -149,3 +149,10 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		vim.cmd("redrawtabline")
 	end,
 })
+
+-- Auto-refresh tabufline when buffer is modified (for * indicator)
+vim.api.nvim_create_autocmd({ "BufModifiedSet", "TextChanged", "TextChangedI" }, {
+	callback = function()
+		vim.cmd("redrawtabline")
+	end,
+})
