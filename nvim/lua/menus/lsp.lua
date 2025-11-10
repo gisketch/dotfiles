@@ -45,6 +45,24 @@ return {
     rtxt = "k",
   },
 
+  {
+    name = " Show Diagnostics",
+    cmd = function()
+      Snacks.picker.diagnostics()
+    end,
+    keybind = "H",
+    rtxt = "H",
+  },
+
+  {
+    name = " Show Diagnostics (buffer)",
+    cmd = function()
+      Snacks.picker.diagnostics_buffer()
+    end,
+    keybind = "h",
+    rtxt = "h",
+  },
+
   { name = "separator" },
 
   {

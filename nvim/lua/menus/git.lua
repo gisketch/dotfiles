@@ -101,8 +101,15 @@ return {
   },
 
   {
+    name = " Git Branches",
+    cmd = "lua Snacks.picker.git_branches()",
+    keybind = "b",
+    rtxt = "b",
+  },
+
+  {
     name = "󰄾 Git Diff",
-    cmd = "Gdiffsplit",
+    cmd = "lua Snacks.picker.git_diff()",
     keybind = "d",
     rtxt = "d",
   },
@@ -158,7 +165,7 @@ return {
 
   {
     name = "󰆍 Log",
-    cmd = "Git log",
+    cmd = "lua Snacks.picker.git_log()",
     keybind = "l",
     rtxt = "l",
   },

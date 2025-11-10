@@ -17,6 +17,20 @@ return {
     end,
     rtxt = "Y",
   },
+  {
+    name = "󱇜 Split Vertical",
+    cmd = function()
+      vim.cmd "vsplit"
+    end,
+    rtxt = "v",
+  },
+  {
+    name = "󱇘 Split Horizontal",
+    cmd = function()
+      vim.cmd "split"
+    end,
+    rtxt = "b",
+  },
 
   { name = "separator" },
 

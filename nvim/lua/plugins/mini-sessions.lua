@@ -104,13 +104,67 @@ lazy= false,
       vim.ui.select(session_names, {
         prompt = '(CRITICAL) Delete Session: ',
         format_item = function(item)
-          return ' ' .. item
+          return ' ' .. item
         end,
       }, function(choice)
         if choice then
           sessions.delete(choice, { force = true })
         end
       end)
+    end
+
+    -- Helper function to handle unsaved buffers
+    local function handle_unsaved_buffers(callback)
+      local unsaved_buffers = {}
+      for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        if vim.api.nvim_buf_is_loaded(buf)
+           and vim.bo[buf].modified
+           and vim.bo[buf].buflisted then
+          local name = vim.api.nvim_buf_get_name(buf)
+          if name ~= '' then
+            table.insert(unsaved_buffers, { buf = buf, name = name })
+          end
+        end
+      end
+
+      if #unsaved_buffers == 0 then
+        callback()
+        return
+      end
+
+      -- Process each unsaved buffer
+      local function process_buffer(index)
+        if index > #unsaved_buffers then
+          -- Clear LSP references before switching
+          vim.lsp.buf.clear_references()
+          -- Stop all LSP clients to prevent errors on deleted buffers
+          vim.lsp.stop_client(vim.lsp.get_clients())
+          callback()
+          return
+        end
+
+        local buf_info = unsaved_buffers[index]
+        local filename = vim.fn.fnamemodify(buf_info.name, ':t')
+
+        vim.ui.select({ 'Save', 'Discard', 'Cancel' }, {
+          prompt = string.format('Buffer "%s" has unsaved changes: ', filename),
+        }, function(choice)
+          if choice == 'Save' then
+            vim.api.nvim_buf_call(buf_info.buf, function()
+              vim.cmd('write')
+            end)
+            process_buffer(index + 1)
+          elseif choice == 'Discard' then
+            vim.api.nvim_set_option_value('modified', false, { buf = buf_info.buf })
+            process_buffer(index + 1)
+          else
+            -- Cancel - stop the session switch
+            vim.notify('Session switch cancelled', vim.log.levels.INFO)
+          end
+        end)
+      end
+
+      process_buffer(1)
     end
 
     -- Helper function to load session with picker
@@ -130,14 +184,15 @@ lazy= false,
       vim.ui.select(session_names, {
         prompt = 'Load Session: ',
         format_item = function(item)
-          return ' ' .. item
+          return ' ' .. item
         end,
       }, function(choice)
         if choice then
-          sessions.read(choice)
+          handle_unsaved_buffers(function()
+            sessions.read(choice)
+          end)
         end
       end)
     end
   end,
 }
-
