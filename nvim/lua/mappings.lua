@@ -17,23 +17,6 @@ end, { desc = "general format file" })
 -- global lsp mappings
 map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "LSP diagnostic loclist" })
 
--- -- tabufline
--- if require("nvconfig").ui.tabufline.enabled then
---   map("n", "<leader>b", "<cmd>enew<CR>", { desc = "buffer new" })
---
---   map("n", "<tab>", function()
---     require("nvchad.tabufline").next()
---   end, { desc = "buffer goto next" })
---
---   map("n", "<S-tab>", function()
---     require("nvchad.tabufline").prev()
---   end, { desc = "buffer goto prev" })
---
---   map("n", "<leader>x", function()
---     require("nvchad.tabufline").close_buffer()
---   end, { desc = "buffer close" })
--- end
-
 -- Comment
 map("n", "<leader>/", "gcc", { desc = "toggle comment", remap = true })
 map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
@@ -145,13 +128,6 @@ map("n", "<C-S-Down>", ":resize +2<CR>", { noremap = true, silent = true })
 map("n", "<C-S-Up>", ":resize -2<CR>", { noremap = true, silent = true })
 map("n", "<C-S-Right>", ":vertical resize +2<CR>", { noremap = true, silent = true })
 
--- Sessions (mini.sessions)
-map("n", "<leader>us", function()
-  _G.save_session_with_input()
-end, { desc = "Save Session" })
-map("n", "<leader>ud", function()
-  _G.delete_session_with_picker()
-end, { desc = "Delete Session" })
 map("n", "<leader>e", function()
   _G.load_session_with_picker()
 end, { desc = "Load Session" })

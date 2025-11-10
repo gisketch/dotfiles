@@ -122,7 +122,7 @@ return {
       desc = "Git commit (floating)",
     },
     {
-      "<leader>ug",
+      "<leader>mg",
       function()
         -- Git operations with nerd font icons
         local git_operations = {

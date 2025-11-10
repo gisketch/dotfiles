@@ -8,7 +8,7 @@ local M = {}
 M.base46 = {
   theme = "onedark",
   hl_override = {
-    FloatBorder = { fg = "black", bg = "black" },
+    FloatBorder = { fg = "darker_black", bg = "darker_black" },
   },
   hl_add = {
     FlashMatch = { bg = "NONE", fg = { "yellow", "black", 50 } },
@@ -44,7 +44,30 @@ M.base46 = {
   },
 }
 
-M.nvdash = { load_on_startup = true }
+M.nvdash = {
+  load_on_startup = true,
+
+  header = {
+    "                            ",
+    "     ▄▄         ▄ ▄▄▄▄▄▄▄   ",
+    "   ▄▀███▄     ▄██ █████▀    ",
+    "   ██▄▀███▄   ███           ",
+    "   ███  ▀███▄ ███           ",
+    "   ███    ▀██ ███           ",
+    "   ███      ▀ ███           ",
+    "   ▀██ █████▄▀█▀▄██████▄    ",
+    "     ▀ ▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀   ",
+    "                            ",
+    "     Powered By  eovim    ",
+    "                            ",
+  },
+
+  buttons = {
+    { txt = "  Find File", keys = "Spc p f", cmd = "Telescope find_files" },
+    -- TODO: Add more
+  },
+}
+
 M.ui = {
   cmp = {
     style = "flat_dark",

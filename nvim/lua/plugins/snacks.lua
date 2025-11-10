@@ -224,7 +224,7 @@ return {
             desc = "Hide All Notifications",
         },
         {
-            "<leader>un",
+            "<leader>mn",
             function()
                 Snacks.notifier.show_history()
             end,
