@@ -11,6 +11,9 @@ My personal dotfiles managed with [Rotz](https://github.com/volllly/rotz).
 ### Windows
 - Windows Terminal
     - manually copy `settings.json`
+- [Ripgrep](https://github.com/BurntSushi/ripgrep) is required for grep searching with Telescope (OPTIONAL).
+- GCC, Windows users must have [mingw](http://mingw-w64.org/downloads) installed and set on path.
+- Make, Windows users must have [GnuWin32](https://sourceforge.net/projects/gnuwin32) installed and set on path.
 - Scoop
 - eza
 
