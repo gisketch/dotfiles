@@ -7,7 +7,7 @@ return {
       vim.fn.setreg("+", path)
       vim.notify("Copied path: " .. path)
     end,
-    rtxt = "c",
+    rtxt = "p",
   },
   {
     name = " Copy All",
@@ -31,9 +31,14 @@ return {
     end,
     rtxt = "b",
   },
-
   { name = "separator" },
-
+  {
+    name = " Copy References",
+    hl = "Boolean",
+    items = "copy",
+    keybind = "c",
+    rtxt = "c",
+  },
   {
     name = "󰊢 Git Operations",
     hl = "ExGreen",
@@ -64,7 +69,7 @@ return {
   },
   {
     name = "󰈔 LSP",
-    hl = "ExGreen",
+    hl = "ExRed",
     items = "lsp",
     keybind = "l",
     rtxt = "l",

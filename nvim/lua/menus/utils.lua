@@ -10,7 +10,7 @@ return {
   {
     name = "󰎟 Notifications",
     cmd = function()
-      vim.cmd "lua Snacks.picker.notifications()"
+      vim.cmd "Noice telescope"
     end,
     keybind = "n",
     rtxt = "n",

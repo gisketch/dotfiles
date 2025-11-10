@@ -11,7 +11,33 @@ return {
                 enabled = false
             }
         },
+        routes = {
+            {
+                filter = {
+                    event = "msg_show",
+                    min_height = 10,
+                },
+                view = "mini",
+            },
+            {
+                filter = {
+                    event = "msg_show",
+                    kind = "error",
+                    min_height = 10,
+                },
+                opts = { replace = true },
+                view = "notify",
+            },
+        },
         views = {
+            mini = {
+                win_options = {
+                    winblend = 0,
+                },
+            },
+            notify = {
+                replace = true,
+            },
             cmdline_popup = {
                 border = {
                     style = "none",

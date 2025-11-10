@@ -1,17 +1,17 @@
 return {
   {
-    name = "Save Session",
+    name = "󰆓 Save Session",
     cmd = function()
       _G.save_session_with_input()
     end,
     keybind = "s",
     rtxt = "s",
   },
+
+  { name = "separator" },
+
   {
-    name = "separator",
-  },
-  {
-    name = "Delete Session",
+    name = "󰆴 Delete Session",
     cmd = function()
       _G.delete_session_with_picker()
     end,

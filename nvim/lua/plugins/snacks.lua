@@ -11,6 +11,8 @@ return {
       timeout = 3000,
       padding = true,
       style = "fancy",
+      top_down = false,
+      max_lines = 5,
     },
     explorer = {
       replace_netrw = true,
@@ -153,7 +155,7 @@ return {
       },
 
       notification_history = {
-        border = "none", -- Remove borders completely
+        border = "rounded", -- Remove borders completely
         zindex = 100,
         width = 0.6,
         height = 0.6,
@@ -222,6 +224,7 @@ return {
       function()
         Snacks.picker.grep()
       end,
+
       desc = "Find word or string in project",
     },
     {
@@ -292,22 +295,39 @@ return {
     },
   },
   init = function()
-    -- vim.api.nvim_create_autocmd("User", {
-    --     pattern = "VeryLazy",
-    --     callback = function()
-    --         -- Setup some globals for debugging (lazy-loaded)
-    --         _G.dd = function(...)
-    --             Snacks.debug.inspect(...)
-    --         end
-    --         _G.bt = function()
-    --             Snacks.debug.backtrace()
-    --         end
-    --         vim.print = _G.dd -- Override print to use snacks for `:=` command
-    --
-    --         -- Create some toggle mappings
-    --         Snacks.toggle.option("wrap", { name = "wrap" }):map("<leader>uw")
-    --         Snacks.toggle.option("relativenumber", { name = "relative number" }):map("<leader>uL")
-    --     end,
-    -- })
+    -- Intercept long error messages
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "VeryLazy",
+      callback = function()
+        local original_notify = vim.notify
+        vim.notify = function(msg, level, opts)
+          opts = opts or {}
+
+          -- Count lines in the message
+          local line_count = select(2, msg:gsub('\n', '\n')) + 1
+
+          -- If message is too long (more than 8 lines), show compact version
+          if line_count > 8 then
+            local short_msg = "Long error detected. Press <leader>mn to see full message"
+            if level == vim.log.levels.ERROR then
+              short_msg = "Error occurred. Press <leader>mn for details"
+            end
+
+            -- Store full message in history but show short notification
+            original_notify(msg, level, vim.tbl_extend("force", opts, {
+              title = opts.title or "Error",
+              hide_from_history = false
+            }))
+
+            -- Show compact notification
+            vim.defer_fn(function()
+              original_notify(short_msg, level, { title = "Notice" })
+            end, 100)
+          else
+            original_notify(msg, level, opts)
+          end
+        end
+      end,
+    })
   end,
 }
