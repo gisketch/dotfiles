@@ -25,7 +25,7 @@ return {
       sources = {
         explorer = {
           hidden = true,
-          ignored = true,
+          ignored = false,
           auto_close = true,
           layout = {
             position = "right",
@@ -294,40 +294,4 @@ return {
       mode = { "n", "t" },
     },
   },
-  init = function()
-    -- Intercept long error messages
-    vim.api.nvim_create_autocmd("User", {
-      pattern = "VeryLazy",
-      callback = function()
-        local original_notify = vim.notify
-        vim.notify = function(msg, level, opts)
-          opts = opts or {}
-
-          -- Count lines in the message
-          local line_count = select(2, msg:gsub('\n', '\n')) + 1
-
-          -- If message is too long (more than 8 lines), show compact version
-          if line_count > 8 then
-            local short_msg = "Long error detected. Press <leader>mn to see full message"
-            if level == vim.log.levels.ERROR then
-              short_msg = "Error occurred. Press <leader>mn for details"
-            end
-
-            -- Store full message in history but show short notification
-            original_notify(msg, level, vim.tbl_extend("force", opts, {
-              title = opts.title or "Error",
-              hide_from_history = false
-            }))
-
-            -- Show compact notification
-            vim.defer_fn(function()
-              original_notify(short_msg, level, { title = "Notice" })
-            end, 100)
-          else
-            original_notify(msg, level, opts)
-          end
-        end
-      end,
-    })
-  end,
 }

@@ -105,7 +105,10 @@ M.ui = {
         end
 
         local cur_buf = api.nvim_get_current_buf()
-        local cur_file = api.nvim_buf_get_name(cur_buf)
+        local ok, cur_file = pcall(api.nvim_buf_get_name, cur_buf)
+        if not ok or not cur_file then
+          return txt("%=", "Fill")
+        end
         local opts = require("nvconfig").ui.tabufline
 
         -- Normalize path for Windows (lowercase, forward slashes)
@@ -151,10 +154,13 @@ M.ui = {
         local function find_buf_by_path(path)
           local normalized_path = normalize_path(path)
           for _, bufnr in ipairs(api.nvim_list_bufs()) do
-            if api.nvim_buf_is_valid(bufnr) then
-              local buf_path = normalize_path(api.nvim_buf_get_name(bufnr))
-              if buf_path == normalized_path then
-                return bufnr
+            if api.nvim_buf_is_valid(bufnr) and api.nvim_buf_is_loaded(bufnr) then
+              local ok, buf_path = pcall(api.nvim_buf_get_name, bufnr)
+              if ok and buf_path then
+                buf_path = normalize_path(buf_path)
+                if buf_path == normalized_path then
+                  return bufnr
+                end
               end
             end
           end

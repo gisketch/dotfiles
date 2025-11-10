@@ -166,14 +166,24 @@ vim.api.nvim_create_autocmd("User", {
 
 -- Auto-refresh tabufline when switching buffers (for non-Grapple file display)
 vim.api.nvim_create_autocmd("BufEnter", {
-	callback = function()
+	callback = function(ev)
+		local bufnr = ev.buf
+		-- Skip temporary/invalid/unlisted buffers (like LSP temp buffers)
+		if not vim.api.nvim_buf_is_valid(bufnr) or not vim.bo[bufnr].buflisted then
+			return
+		end
 		vim.cmd("redrawtabline")
 	end,
 })
 
 -- Auto-refresh tabufline when buffer is modified (for * indicator)
 vim.api.nvim_create_autocmd({ "BufModifiedSet", "TextChanged", "TextChangedI" }, {
-	callback = function()
+	callback = function(ev)
+		local bufnr = ev.buf
+		-- Skip temporary/invalid/unlisted buffers
+		if not vim.api.nvim_buf_is_valid(bufnr) or not vim.bo[bufnr].buflisted then
+			return
+		end
 		vim.cmd("redrawtabline")
 	end,
 })

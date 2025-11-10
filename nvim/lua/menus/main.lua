@@ -1,6 +1,13 @@
 -- Main custom menu
 return {
   {
+    name = " Registers",
+    cmd = function()
+      Snacks.picker.registers()
+    end,
+    rtxt = "r",
+  },
+  {
     name = " Copy File Path",
     cmd = function()
       local path = vim.fn.expand "%:p"
@@ -15,7 +22,7 @@ return {
       vim.cmd "%y+"
       vim.notify "Copied entire file to clipboard"
     end,
-    rtxt = "Y",
+    rtxt = "a",
   },
   {
     name = "󱇜 Split Vertical",

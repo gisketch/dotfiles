@@ -1,5 +1,6 @@
 return {
   "https://github.com/gisketch/menu",
+-- dir = [[C:\Users\gisketch\.dotfiles\refs\menu]],
   dependencies = { "nvzone/volt" },
   lazy = false,
   config = function()
@@ -11,11 +12,9 @@ return {
       if mode == "v" or mode == "V" or mode == "\22" then -- visual modes
         vim.g.menu_visual_start = vim.fn.line("v")
         vim.g.menu_visual_end = vim.fn.line(".")
-        print("Captured range: " .. vim.g.menu_visual_start .. "-" .. vim.g.menu_visual_end)
       else
         vim.g.menu_visual_start = nil
         vim.g.menu_visual_end = nil
-        print("Normal mode - no range")
       end
 
       require("menu").open "main"
