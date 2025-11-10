@@ -1,5 +1,26 @@
 require "nvchad.autocmds"
 
+-- Clear all buffers on startup
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		vim.schedule(function()
+			-- Get all buffers
+			local bufs = vim.api.nvim_list_bufs()
+			local current_buf = vim.api.nvim_get_current_buf()
+
+			-- Delete all buffers except current
+			for _, buf in ipairs(bufs) do
+				if buf ~= current_buf and vim.api.nvim_buf_is_valid(buf) then
+					pcall(vim.api.nvim_buf_delete, buf, { force = true })
+				end
+			end
+
+			-- Force redraw to clean up UI
+			vim.cmd("redraw!")
+		end)
+	end,
+})
+
 -- Autocmds for relative number behavior
 vim.cmd [[
     autocmd InsertEnter * :set norelativenumber

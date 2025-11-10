@@ -253,14 +253,11 @@ M.ui = {
   statusline = {
     theme = "default",
     separator_style = "default",
-    order = { "mode", "f", "git", "%=", "lsp_msg", "%=", "xyz", "spc", "lsp", "cwd", "spc", "abc" },
+    order = { "mode", "f", "git", "%=", "lsp_msg", "%=", "lsp", "cwd", "spc", "abc", "spc" },
     modules = {
       spc = " ",
-      xyz = function()
-        return require("triforce.lualine").achievements()
-      end,
       abc = function()
-        return require("triforce.lualine").level()
+        return require("triforce.lualine").streak()
       end,
       f = " %F ",
     },
