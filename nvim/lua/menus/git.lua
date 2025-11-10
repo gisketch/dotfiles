@@ -30,7 +30,7 @@ local function open_git_in_float(cmd, title)
     end,
   })
 
-  vim.cmd("startinsert")
+  vim.cmd "startinsert"
   vim.api.nvim_buf_set_keymap(buf, "n", "q", "<cmd>close<cr>", { noremap = true, silent = true })
   vim.api.nvim_buf_set_keymap(buf, "t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })
 end
@@ -39,7 +39,7 @@ return {
   {
     name = "󰊢 Git Status",
     cmd = function()
-      vim.cmd("Git")
+      vim.cmd "Git"
       local fugitive_buf = vim.api.nvim_get_current_buf()
       local fugitive_win = vim.api.nvim_get_current_win()
 
@@ -65,13 +65,13 @@ return {
       vim.api.nvim_buf_set_keymap(fugitive_buf, "n", "q", "<cmd>close<cr>", { noremap = true, silent = true })
     end,
     keybind = "s",
-    rtxt = "gs",
+    rtxt = "s",
   },
 
   {
     name = " Git Commit",
     cmd = function()
-      vim.cmd("Git commit")
+      vim.cmd "Git commit"
       local commit_buf = vim.api.nvim_get_current_buf()
       local commit_win = vim.api.nvim_get_current_win()
 
@@ -97,7 +97,7 @@ return {
       vim.api.nvim_buf_set_keymap(commit_buf, "n", "q", "<cmd>cq<cr>", { noremap = true, silent = true })
     end,
     keybind = "c",
-    rtxt = "m",
+    rtxt = "c",
   },
 
   {
@@ -115,7 +115,16 @@ return {
       open_git_in_float("git push", " 󰕙 Push ")
     end,
     keybind = "p",
-    rtxt = "p"
+    rtxt = "p",
+  },
+
+  {
+    name = "󰕙 Push (Force with Lease)",
+    cmd = function()
+      open_git_in_float("git push --force-with-lease", " 󰕙 Push ")
+    end,
+    keybind = "k",
+    rtxt = "k",
   },
 
   {
@@ -157,7 +166,7 @@ return {
   {
     name = " Amend Commit",
     cmd = function()
-      vim.cmd("Git commit --amend")
+      vim.cmd "Git commit --amend"
       local commit_buf = vim.api.nvim_get_current_buf()
       local commit_win = vim.api.nvim_get_current_win()
 

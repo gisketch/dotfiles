@@ -136,16 +136,12 @@ M.ui = {
 					]]
         end
 
-        local result = {}
-
-        for i, tag in ipairs(tags) do
-          -- Normalize both paths for comparison
-          local tag_path = normalize_path(tag.path)
-          local is_current = tag_path == cur_file
-          local tbHlName = "BufO" .. (is_current and "n" or "ff")
+        -- Helper to create a tab entry
+        local function create_tab(path, index, is_active)
+          local tbHlName = "BufO" .. (is_active and "n" or "ff")
 
           -- Get file icon
-          local name = filename(tag.path)
+          local name = filename(path)
           local icon = "󰈚 "
           local icon_hl = new_hl("DevIconDefault", tbHlName)
 
@@ -159,22 +155,52 @@ M.ui = {
 
           -- Calculate padding
           local w = opts.bufwidth
-          local pad = math.floor((w - #name - 4) / 2)
+          local num_width = index and 2 or 0 -- " 1 " takes 3 chars, we account for it
+          local pad = math.floor((w - #name - 3 - num_width) / 2)
           pad = pad <= 0 and 1 or pad
 
           -- Truncate long names
-          local maxname_len = w - 4
+          local maxname_len = w - 3 - num_width
           name = string.sub(name, 1, maxname_len - 2) .. (#name > maxname_len and ".." or "")
           name = txt(name, tbHlName)
 
-          -- Build the tab with index number on the right
+          -- Build the tab
           local content = string.rep(" ", pad - 1) .. icon_hl .. icon .. name .. string.rep(" ", pad - 1)
-          local index_num = txt(" " .. i .. " ", tbHlName)
 
-          content = btn(content .. index_num, nil, "GrappleSelect", i)
+          if index then
+            -- Grapple file: add index number and make it clickable
+            local index_num = txt(" " .. index .. " ", tbHlName)
+            content = btn(content .. index_num, nil, "GrappleSelect", index)
+          else
+            -- Non-Grapple file: just make the whole thing clickable to go to buffer
+            content = btn(content, nil, "GoToBuf", cur_buf)
+          end
+
           content = txt(content, tbHlName)
+          return content
+        end
 
-          table.insert(result, content)
+        local result = {}
+
+        -- Check if current file is in Grapple tags
+        local is_in_grapple = false
+        for _, tag in ipairs(tags) do
+          if normalize_path(tag.path) == cur_file then
+            is_in_grapple = true
+            break
+          end
+        end
+
+        -- If current file is NOT in Grapple, show it first (no number)
+        if not is_in_grapple and cur_file ~= "" then
+          table.insert(result, create_tab(cur_file, nil, true))
+        end
+
+        -- Show all Grapple files with numbers
+        for i, tag in ipairs(tags) do
+          local tag_path = normalize_path(tag.path)
+          local is_current = tag_path == cur_file
+          table.insert(result, create_tab(tag.path, i, is_current))
         end
 
         return table.concat(result) .. txt("%=", "Fill")

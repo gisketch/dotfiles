@@ -142,3 +142,10 @@ vim.api.nvim_create_autocmd("User", {
 		vim.cmd("redrawtabline")
 	end,
 })
+
+-- Auto-refresh tabufline when switching buffers (for non-Grapple file display)
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function()
+		vim.cmd("redrawtabline")
+	end,
+})
