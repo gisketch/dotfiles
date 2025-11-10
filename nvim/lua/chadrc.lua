@@ -9,6 +9,7 @@ M.base46 = {
   theme = "onedark",
   hl_override = {
     FloatBorder = { fg = "darker_black", bg = "darker_black" },
+    VertSplit = { fg = "black", bg = "black" },
   },
   hl_add = {
     FlashMatch = { bg = "NONE", fg = { "yellow", "black", 50 } },
@@ -48,23 +49,33 @@ M.nvdash = {
   load_on_startup = true,
 
   header = {
+    " ╭╮╭┬─╮╭─╮┬  ┬┬╭┬╮ ",
+    " │││├┤ │ │╰┐┌╯││││ ",
+    " ╯╰╯╰─╯╰─╯ ╰╯ ┴┴ ┴ ",
+    " @gisketch ",
     "                            ",
-    "     ▄▄         ▄ ▄▄▄▄▄▄▄   ",
-    "   ▄▀███▄     ▄██ █████▀    ",
-    "   ██▄▀███▄   ███           ",
-    "   ███  ▀███▄ ███           ",
-    "   ███    ▀██ ███           ",
-    "   ███      ▀ ███           ",
-    "   ▀██ █████▄▀█▀▄██████▄    ",
-    "     ▀ ▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀   ",
     "                            ",
-    "     Powered By  eovim    ",
     "                            ",
   },
 
   buttons = {
-    { txt = "  Find File", keys = "Spc p f", cmd = "Telescope find_files" },
-    -- TODO: Add more
+    { txt = "  Find File", keys = "Spc p f", cmd = ":lua Snacks.picker.files()" },
+    { txt = "  Select Session", keys = "Spc e", cmd = ":lua _G.load_session_with_picker()" },
+    { txt = "󰈭  Find Word", keys = "Spc p s", cmd = ":lua Snacks.picker.grep()" },
+    { txt = "󱥚  Themes", keys = "th", cmd = ":lua require('nvchad.themes').open()" },
+    { txt = "  Mappings", keys = "ch", cmd = "NvCheatsheet" },
+    { txt = "─", hl = "NvDashFooter", no_gap = true, rep = true },
+    {
+      txt = function()
+        local stats = require("lazy").stats()
+        local ms = math.floor(stats.startuptime) .. " ms"
+        return "  Loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms
+      end,
+      hl = "NvDashFooter",
+      no_gap = true,
+      content = "fit",
+    },
+    { txt = "─", hl = "NvDashFooter", no_gap = true, rep = true },
   },
 }
 
@@ -191,7 +202,12 @@ M.ui = {
           name = string.sub(name, 1, maxname_len - 2) .. (#name > maxname_len and ".." or "")
 
           -- Build the tab
-          local content = string.rep(" ", pad - 1) .. icon_hl .. icon .. modified_indicator .. txt(name, tbHlName) .. string.rep(" ", pad - 1)
+          local content = string.rep(" ", pad - 1)
+            .. icon_hl
+            .. icon
+            .. modified_indicator
+            .. txt(name, tbHlName)
+            .. string.rep(" ", pad - 1)
 
           if index then
             -- Grapple file: add index number and make it clickable

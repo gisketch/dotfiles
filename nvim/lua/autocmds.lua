@@ -156,3 +156,19 @@ vim.api.nvim_create_autocmd({ "BufModifiedSet", "TextChanged", "TextChangedI" },
 		vim.cmd("redrawtabline")
 	end,
 })
+
+-- Force buffer redraw when entering windows (fixes rendering after closing splits)
+vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter" }, {
+	callback = function()
+		vim.cmd("redraw")
+	end,
+})
+
+-- Force full redraw after window operations (closing splits, etc)
+vim.api.nvim_create_autocmd("WinClosed", {
+	callback = function()
+		vim.schedule(function()
+			vim.cmd("redraw!")
+		end)
+	end,
+})
