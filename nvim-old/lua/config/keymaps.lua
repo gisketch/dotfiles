@@ -40,12 +40,12 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- Source current file
 vim.keymap.set("n", "<leader><leader>", function()
-	vim.cmd("so")
+    vim.cmd("so")
 end)
 
 -- Theme picker
 vim.keymap.set("n", "<leader>ct", function()
-	_G.ThemeManager.theme_picker()
+    _G.ThemeManager.theme_picker()
 end, { desc = "Change theme" })
 
 -- macOS clipboard integration
@@ -57,14 +57,14 @@ vim.api.nvim_set_keymap("t", "<C-S-v>", '<C-\\><C-o>"+p', { noremap = true, sile
 
 -- Session management
 local function save_session()
-	local session_name = vim.fn.input("Enter session name: ")
-	if session_name ~= "" then
-		local cmd = "mksession! ~/.vim/sessions/" .. session_name
-		vim.cmd(cmd)
-		print("Session saved as: " .. session_name)
-	else
-		print("No session name provided. Session not saved.")
-	end
+    local session_name = vim.fn.input("Enter session name: ")
+    if session_name ~= "" then
+        local cmd = "mksession! ~/.vim/sessions/" .. session_name
+        vim.cmd(cmd)
+        print("Session saved as: " .. session_name)
+    else
+        print("No session name provided. Session not saved.")
+    end
 end
 
 vim.api.nvim_set_keymap("n", "<leader>S", ":lua save_session()<CR>", { noremap = true, silent = true })
@@ -108,16 +108,22 @@ vim.api.nvim_set_keymap("n", "<C-S-h>", ":tabprevious<CR>", { noremap = true, si
 
 -- Code block utility function
 function _G.surround_with_backticks()
-	local start_pos = vim.fn.getpos("'<")
-	local end_pos = vim.fn.getpos("'>")
-	local lines = vim.api.nvim_buf_get_lines(0, start_pos[2] - 1, end_pos[2], false)
-	local language = vim.fn.input("Enter language: ")
-	local surrounded_text = "```" .. language .. "\n" .. table.concat(lines, "\n") .. "\n```"
-	local new_lines = {}
-	for s in surrounded_text:gmatch("[^\r\n]+") do
-		table.insert(new_lines, s)
-	end
-	vim.api.nvim_buf_set_lines(0, start_pos[2] - 1, end_pos[2], false, new_lines)
+    local start_pos = vim.fn.getpos("'<")
+    local end_pos = vim.fn.getpos("'>")
+    local lines = vim.api.nvim_buf_get_lines(0, start_pos[2] - 1, end_pos[2], false)
+    local language = vim.fn.input("Enter language: ")
+    local surrounded_text = "```" .. language .. "\n" .. table.concat(lines, "\n") .. "\n```"
+    local new_lines = {}
+    for s in surrounded_text:gmatch("[^\r\n]+") do
+        table.insert(new_lines, s)
+    end
+    vim.api.nvim_buf_set_lines(0, start_pos[2] - 1, end_pos[2], false, new_lines)
 end
 
 vim.api.nvim_set_keymap("x", "<leader>cb", ":lua surround_with_backticks()<CR>", { noremap = true, silent = true })
+
+
+-- Menu keymaps
+vim.keymap.set("n", "<leader>o", function()
+    require("menu").open("gitsigns")
+end, {})

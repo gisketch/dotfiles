@@ -94,7 +94,7 @@ if vim.g.neovide then
     -- See lua/plugins/colorscheme.lua for theme-specific color configurations
 
     vim.g.neovide_padding_top = 2
-    vim.g.neovide_padding_bottom = 2
+    vim.g.neovide_padding_bottom = 0
     vim.g.neovide_padding_right = 2
     vim.g.neovide_padding_left = 2
 

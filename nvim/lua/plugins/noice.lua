@@ -22,10 +22,10 @@ return {
                     winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
                 },
             },
-            cmdline = {
-                border = {
-                    style = "none",
-                    padding = { 1, 3 },
+            cmdline = {
+                border = {
+                    style = "none",
+                    padding = { 1, 3 },
                 },
             },
         },

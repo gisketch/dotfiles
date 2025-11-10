@@ -1,184 +1,111 @@
--- File explorer configuration
-
-
 return {
-    "stevearc/oil.nvim",
-    lazy = false,
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-        require("oil").setup({
+  "stevearc/oil.nvim",
+  lazy = false,
+  dependencies = { "nvim-tree/nvim-web-devicons" },
+  config = function()
+    require("oil").setup {
+      default_file_explorer = true,
+      view_options = {
+        show_hidden = true,
+      },
 
+      columns = {
 
-            default_file_explorer = true,
+        "icon",
 
+        -- "permissions",
 
-            view_options = {
+        -- "size",
 
+        -- "mtime",
+      },
 
-                show_hidden = true,
+      buf_options = {
 
+        buflisted = false,
 
-            },
+        bufhidden = "hide",
+      },
 
+      win_options = {
 
-            columns = {
+        wrap = false,
 
+        signcolumn = "no",
 
-                "icon",
+        cursorcolumn = false,
 
+        foldcolumn = "0",
 
-                -- "permissions",
+        spell = false,
 
+        list = false,
 
-                -- "size",
+        conceallevel = 3,
 
+        concealcursor = "nvic",
+      },
 
-                -- "mtime",
+      delete_to_trash = false,
 
+      skip_confirm_for_simple_edits = false,
 
-            },
+      prompt_save_on_select_new_entry = true,
 
+      cleanup_delay_ms = 2000,
 
-            buf_options = {
+      lsp_file_methods = {
 
+        enabled = true,
 
-                buflisted = false,
+        timeout_ms = 1000,
 
+        autosave_changes = false,
+      },
 
-                bufhidden = "hide",
+      constrain_cursor = "editable",
 
+      watch_for_changes = false,
 
-            },
+      keymaps = {
 
+        ["g?"] = "actions.show_help",
 
-            win_options = {
+        ["<CR>"] = "actions.select",
 
+        ["<C-s>"] = { "actions.select", opts = { vertical = true } },
 
-                wrap = false,
+        ["<C-h>"] = { "actions.select", opts = { horizontal = true } },
 
+        -- ["<C-t>"] = { "actions.select", opts = { tab = true } },
 
-                signcolumn = "no",
+        ["<C-p>"] = "actions.preview",
 
+        ["<C-c>"] = "actns.close",
 
-                cursorcolumn = false,
+        ["<C-l>"] = "actions.refresh",
 
+        ["-"] = "actions.parent",
 
-                foldcolumn = "0",
+        ["_"] = "actions.open_cwd",
 
+        ["`"] = "actions.cd",
 
-                spell = false,
+        ["~"] = { "actions.cd", opts = { scope = "tab" } },
 
+        ["gs"] = "actions.change_sort",
 
-                list = false,
+        ["gx"] = "actions.open_external",
 
+        ["g."] = "actions.toggle_hidden",
 
-                conceallevel = 3,
-
-
-                concealcursor = "nvic",
-
-
-            },
-
-
-            delete_to_trash = false,
-
-
-            skip_confirm_for_simple_edits = false,
-
-
-            prompt_save_on_select_new_entry = true,
-
-
-            cleanup_delay_ms = 2000,
-
-
-            lsp_file_methods = {
-
-
-                enabled = true,
-
-
-                timeout_ms = 1000,
-
-
-                autosave_changes = false,
-
-
-            },
-
-
-            constrain_cursor = "editable",
-
-
-            watch_for_changes = false,
-
-
-            keymaps = {
-
-
-                ["g?"] = "actions.show_help",
-
-
-                ["<CR>"] = "actions.select",
-
-
-                ["<C-s>"] = { "actions.select", opts = { vertical = true } },
-
-
-                ["<C-h>"] = { "actions.select", opts = { horizontal = true } },
-
-
-                -- ["<C-t>"] = { "actions.select", opts = { tab = true } },
-
-
-                ["<C-p>"] = "actions.preview",
-
-
-                ["<C-c>"] = "actns.close",
-
-
-                ["<C-l>"] = "actions.refresh",
-
-
-                ["-"] = "actions.parent",
-
-
-                ["_"] = "actions.open_cwd",
-
-
-                ["`"] = "actions.cd",
-
-
-                ["~"] = { "actions.cd", opts = { scope = "tab" } },
-
-
-                ["gs"] = "actions.change_sort",
-
-
-                ["gx"] = "actions.open_external",
-
-
-                ["g."] = "actions.toggle_hidden",
-
-
-                ["g\\"] = "actions.toggle_trash",
-
-
-            },
-
-
-        })
-    end,
-
-
-    keys = {
-
-
-        { "<leader>pv", "<cmd>Oil<cr>", desc = "Open file explorer" },
-
-
-    },
-
-
+        ["g\\"] = "actions.toggle_trash",
+      },
+    }
+  end,
+
+  keys = {
+
+    { "<leader>pv", "<cmd>Oil<cr>", desc = "Open file explorer" },
+  },
 }

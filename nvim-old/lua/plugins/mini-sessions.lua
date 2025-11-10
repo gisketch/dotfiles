@@ -1,7 +1,7 @@
+-- Mini.sessions for session management
 return {
   "nvim-mini/mini.sessions",
   version = false,
-lazy= false,
   config = function()
     local sessions = require('mini.sessions')
 
@@ -139,5 +139,27 @@ lazy= false,
       end)
     end
   end,
+  keys = {
+    {
+      "<leader>us",
+      function()
+        _G.save_session_with_input()
+      end,
+      desc = "Save Session",
+    },
+    {
+      "<leader>ud",
+      function()
+        _G.delete_session_with_picker()
+      end,
+      desc = "Delete Session",
+    },
+    {
+      "<leader>e",
+      function()
+        _G.load_session_with_picker()
+      end,
+      desc = "Load Session",
+    },
+  },
 }
-

@@ -6,4 +6,3 @@ return {
         require("tiny-glimmer").setup()
     end,
 }
-

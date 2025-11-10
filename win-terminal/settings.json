@@ -75,12 +75,12 @@
             "keys": "alt+down"
         },
         {
-            "id": null,
-            "keys": "alt+left"
-        },
-        {
             "id": "Terminal.MoveFocusRight",
             "keys": "ctrl+right"
+        },
+        {
+            "id": null,
+            "keys": "alt+left"
         },
         {
             "id": null,
@@ -171,7 +171,7 @@
                 "icon": "\ue756",
                 "name": "Windows PowerShell",
                 "opacity": 100,
-                "padding": "0",
+                "padding": "2,4,2,0",
                 "scrollbarState": "visible",
                 "useAcrylic": true
             },

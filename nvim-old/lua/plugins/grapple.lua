@@ -48,7 +48,7 @@ return {
         end)
       end,
     })
-
+    
     -- Force refresh when directory changes (important for session switching)
     vim.api.nvim_create_autocmd("DirChanged", {
       group = grapple_group,
@@ -58,7 +58,7 @@ return {
         end)
       end,
     })
-
+    
     -- Force refresh when sessions are loaded
     vim.api.nvim_create_autocmd({ "SessionLoadPost", "VimEnter" }, {
       group = grapple_group,
@@ -70,4 +70,3 @@ return {
     })
   end,
 }
-

@@ -1,3 +1,5 @@
+-- Snacks.nvim with dashboard and utilities
+
 return {
     "folke/snacks.nvim",
     priority = 1000,
@@ -15,9 +17,9 @@ return {
         quickfile = { enabled = true },
         statuscolumn = { enabled = true },
         words = { enabled = true },
-        -- indent = {
-        --     char = "│",
-        -- },
+        indent = {
+            char = "│",
+        },
         picker = {
             enabled = true,
             ui_select = true,
@@ -85,11 +87,11 @@ return {
             win = { style = "input" },
             expand = true,
         },
-        -- terminal = {
-        --     win = {
-        --         style = "terminal",
-        --     },
-        -- },
+        terminal = {
+            win = {
+                style = "terminal",
+            },
+        },
         -- STYLES
         styles = {
             notification = {
@@ -154,6 +156,58 @@ return {
                 },
             }
         },
+        dashboard = {
+            enabled = true,
+            width = 60,
+            row = nil, -- center
+            col = nil, -- center
+            pane_gap = 4,
+            autokeys = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+            preset = {
+            header = [[
+⢦⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⡤
+⠘⣿⣿⣿⣷⣦⣄⣀⠀⢠⠔⠀⢀⡼⠿⠿⢆⠀⠀⠲⣄⠀⣀⣠⣴⣾⣿⣿⣿⠇
+⠀⠈⠉⠉⠛⠛⠻⠿⢿⣿⠀⢀⣾⣷⡀⢀⣾⣷⡀⠀⣿⡿⠿⠿⠛⠛⠉⠉⠁⠀
+⠀⠀⣤⣤⣶⣶⣶⣶⣶⣿⣆⠈⠉⠉⠉⠉⠉⠉⠉⢠⣿⣶⣶⣶⣶⣶⣤⣤⠀⠀
+⠀⠀⠘⣿⡿⠟⠛⠉⣡⣿⣿⣷⣤⠀⢠⣆⠀⣤⣶⣿⣿⣬⡉⠛⠻⠿⣿⠇⠀⠀
+⠀⠀⠀⠀⠀⢀⣴⣿⡿⢋⣿⣿⠛⢠⣿⣿⡄⠛⢿⣿⡘⢿⣿⣦⣀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠉⠻⠏⠀⣸⣿⡇⢀⠻⣿⣿⠟⣀⠸⣿⣇⠀⠙⠟⠋⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢠⡟⠁⣿⣿⠀⠻⣆⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠘⢟⠉⠙⠓⠀⠘⠏⠀⠘⠟⠉⡻⠋⠀⠀⠀⠀⠀⠀⠀⠀
+        ]],
+            },
+            -- Dashboard sections
+            sections = {
+                { section = "header" },
+                -- -- {
+                -- --     pane = 2,
+                -- --     section = "terminal",
+                -- --     -- cmd = "pokemon-colorscripts --no-title --name mudkip",
+                -- --     cmd = "pokemonshow",
+                -- --     height = 10,
+                -- --     padding = 1,
+                -- -- },
+                -- { section = "keys",  gap = 1, padding = 1 },
+                -- {
+                --     pane = 2,
+                --     icon = " ",
+                --     title = "Recent Files",
+                --     section = "recent_files",
+                --     indent = 2,
+                --     padding = 1,
+                -- },
+                -- {
+                --     pane = 2,
+                --     icon = " ",
+                --     title = "Projects",
+                --     section = "projects",
+                --     indent = 2,
+                --     padding = 1,
+                --     limit = 10,
+                -- },
+                { section = "startup" },
+            },
+        },
     },
     keys = {
         -- add terminal c-t
@@ -164,6 +218,13 @@ return {
             end,
             desc = "Terminal",
             mode = { "n", "t" },
+        },
+        {
+            "<leader>.",
+            function()
+                Snacks.dashboard()
+            end,
+            desc = "Dashboard",
         },
         {
             "<leader>pf",
@@ -248,22 +309,22 @@ return {
         },
     },
     init = function()
-        -- vim.api.nvim_create_autocmd("User", {
-        --     pattern = "VeryLazy",
-        --     callback = function()
-        --         -- Setup some globals for debugging (lazy-loaded)
-        --         _G.dd = function(...)
-        --             Snacks.debug.inspect(...)
-        --         end
-        --         _G.bt = function()
-        --             Snacks.debug.backtrace()
-        --         end
-        --         vim.print = _G.dd -- Override print to use snacks for `:=` command
-        --
-        --         -- Create some toggle mappings
-        --         Snacks.toggle.option("wrap", { name = "wrap" }):map("<leader>uw")
-        --         Snacks.toggle.option("relativenumber", { name = "relative number" }):map("<leader>uL")
-        --     end,
-        -- })
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "VeryLazy",
+            callback = function()
+                -- Setup some globals for debugging (lazy-loaded)
+                _G.dd = function(...)
+                    Snacks.debug.inspect(...)
+                end
+                _G.bt = function()
+                    Snacks.debug.backtrace()
+                end
+                vim.print = _G.dd -- Override print to use snacks for `:=` command
+
+                -- Create some toggle mappings
+                Snacks.toggle.option("wrap", { name = "wrap" }):map("<leader>uw")
+                Snacks.toggle.option("relativenumber", { name = "relative number" }):map("<leader>uL")
+            end,
+        })
     end,
 }

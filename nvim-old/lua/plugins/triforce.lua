@@ -1,8 +1,7 @@
 return {
     -- dir = [[F:\devfiles\nvim-plugins\triforce.nvim]],
-    -- dir = [[F:\devfiles\nvim-plugins\tritest]],
-    "gisketch/triforce.nvim",
-    lazy = false,
+    dir = [[F:\devfiles\nvim-plugins\tritest]],
+    -- "gisketch/triforce.nvim",
     dependencies = {
         'nvzone/volt',
     },
