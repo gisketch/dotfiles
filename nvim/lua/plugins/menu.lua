@@ -24,6 +24,10 @@ return {
       require("menu").open "lsp"
     end, { desc = "Open LSP menu" })
 
+    vim.keymap.set({ "n", "v" }, "<leader>h", function()
+      require("menu").open "http"
+    end, { desc = "Open HTTP menu" })
+
     -- Optional: Right-click context menu
     vim.keymap.set({ "n", "v" }, "<RightMouse>", function()
       vim.cmd.exec '"normal! \\<RightMouse>"'

@@ -1,6 +1,9 @@
 # zoxide init
 Invoke-Expression (& { (zoxide init powershell | Out-String) }) | Out-Null
 
+$env:Path += ";C:\Program Files\PostgreSQL\18\bin"
+$env:Path += ";C:\Program Files\PostgreSQL\18\lib"
+
 # oh-my-posh
 oh-my-posh init pwsh --config ~/.config/oh-my-posh/theme.omp.json | Invoke-Expression
 
@@ -40,4 +43,5 @@ function gps { git push @args }
 function gbr { git branch @args }
 function gam { git add @args }
 function gap { git add -p @args }
+function vim { neovide --frame none @args }
 

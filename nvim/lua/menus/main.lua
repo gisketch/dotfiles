@@ -38,6 +38,13 @@ return {
     end,
     rtxt = "b",
   },
+  {
+    name = " New Tab",
+    cmd = function()
+      vim.cmd "tabnew"
+    end,
+    rtxt = "n",
+  },
   { name = "separator" },
   {
     name = " Copy References",
@@ -60,12 +67,19 @@ return {
     keybind = "h",
     rtxt = "h",
   },
+  -- {
+  --   name = "󰀄 Sessions",
+  --   hl = "ExYellow",
+  --   items = "sessions",
+  --   keybind = "s",
+  --   rtxt = "s",
+  -- },
   {
-    name = "󰀄 Sessions",
+    name = " Projects",
     hl = "ExYellow",
-    items = "sessions",
-    keybind = "s",
-    rtxt = "s",
+    items = "projects",
+    keybind = "p",
+    rtxt = "p",
   },
   {
     name = "󰛡 Utilities",
@@ -80,5 +94,14 @@ return {
     items = "lsp",
     keybind = "l",
     rtxt = "l",
+  },
+  { name = "separator" },
+  {
+    name = "󰆼 Query Database",
+    hl = "ExGreen",
+    cmd = function()
+      vim.cmd("DBUI")
+    end,
+    rtxt = "d",
   },
 }

@@ -60,7 +60,7 @@ M.nvdash = {
 
   buttons = {
     { txt = "  Find File", keys = "Spc p f", cmd = ":lua Snacks.picker.files()" },
-    { txt = "  Select Session", keys = "Spc e", cmd = ":lua _G.load_session_with_picker()" },
+    { txt = "  Select Project", keys = "Spc e", cmd = ":lua _G.load_project_with_picker()" },
     { txt = "󰈭  Find Word", keys = "Spc p s", cmd = ":lua Snacks.picker.grep()" },
     { txt = "󱥚  Themes", keys = "th", cmd = ":lua require('nvchad.themes').open()" },
     { txt = "  Mappings", keys = "ch", cmd = "NvCheatsheet" },

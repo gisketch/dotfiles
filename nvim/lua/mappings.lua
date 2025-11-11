@@ -28,28 +28,6 @@ end, { desc = "telescope nvchad themes" })
 -- terminal
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
 
--- new terminals
-map("n", "<leader>h", function()
-  require("nvchad.term").new { pos = "sp" }
-end, { desc = "terminal new horizontal term" })
-
-map("n", "<leader>v", function()
-  require("nvchad.term").new { pos = "vsp" }
-end, { desc = "terminal new vertical term" })
-
--- toggleable
-map({ "n", "t" }, "<A-v>", function()
-  require("nvchad.term").toggle { pos = "vsp", id = "vtoggleTerm" }
-end, { desc = "terminal toggleable vertical term" })
-
-map({ "n", "t" }, "<A-h>", function()
-  require("nvchad.term").toggle { pos = "sp", id = "htoggleTerm" }
-end, { desc = "terminal toggleable horizontal term" })
-
-map({ "n", "t" }, "<A-i>", function()
-  require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
-end, { desc = "terminal toggle floating term" })
-
 -- whichkey
 map("n", "<leader>wK", "<cmd>WhichKey <CR>", { desc = "whichkey all keymaps" })
 
@@ -128,6 +106,12 @@ map("n", "<C-S-Down>", ":resize +2<CR>", { noremap = true, silent = true })
 map("n", "<C-S-Up>", ":resize -2<CR>", { noremap = true, silent = true })
 map("n", "<C-S-Right>", ":vertical resize +2<CR>", { noremap = true, silent = true })
 
+-- Tab management
+map("n", "<C-t>", ":tabnew<CR>", { noremap = true, silent = true, desc = "new tab" })
+map("n", "<C-w>", ":tabclose<CR>", { noremap = true, silent = true, nowait = true, desc = "close tab" })
+map("n", "<C-Tab>", ":tabnext<CR>", { noremap = true, silent = true, desc = "next tab" })
+map("n", "<C-S-Tab>", ":tabprevious<CR>", { noremap = true, silent = true, desc = "previous tab" })
+
 map("n", "<leader>e", function()
-  _G.load_session_with_picker()
-end, { desc = "Load Session" })
+  _G.load_project_with_picker()
+end, { desc = "Load Project" })

@@ -203,3 +203,90 @@ vim.api.nvim_create_autocmd("WinClosed", {
 		end)
 	end,
 })
+
+-- SQL-specific cmp sources (vim-dadbod-completion + buffer)
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "sql",
+	callback = function()
+		local cmp_ok, cmp = pcall(require, "cmp")
+		if not cmp_ok then
+			return
+		end
+
+		-- Get current sources (NvChad defaults)
+		local config = cmp.get_config()
+		local sources = config.sources or {}
+
+		-- Add dadbod and buffer if not already present
+		local has_dadbod = false
+		local has_buffer = false
+
+		for _, source in ipairs(sources) do
+			if source.name == "vim-dadbod-completion" then
+				has_dadbod = true
+			end
+			if source.name == "buffer" then
+				has_buffer = true
+			end
+		end
+
+		if not has_dadbod then
+			table.insert(sources, { name = "vim-dadbod-completion" })
+		end
+
+		if not has_buffer then
+			table.insert(sources, { name = "buffer" })
+		end
+
+		-- Apply the modified sources with formatting to strip ^M and sorting to deprioritize functions
+		local types = require("cmp.types")
+		local compare = require("cmp.config.compare")
+
+		cmp.setup.buffer({
+			sources = sources,
+			sorting = {
+				priority_weight = 2,
+				comparators = {
+					compare.offset,
+					compare.exact,
+					compare.score,
+					-- Custom comparator to push functions to the bottom
+					function(entry1, entry2)
+						local kind1 = entry1:get_kind()
+						local kind2 = entry2:get_kind()
+						local is_func1 = kind1 == types.lsp.CompletionItemKind.Function
+						local is_func2 = kind2 == types.lsp.CompletionItemKind.Function
+
+						if is_func1 and not is_func2 then
+							return false
+						elseif not is_func1 and is_func2 then
+							return true
+						end
+					end,
+					compare.recently_used,
+					compare.locality,
+					compare.kind,
+					compare.length,
+					compare.order,
+				},
+			},
+			formatting = {
+				format = function(entry, vim_item)
+					-- Strip carriage returns from dadbod completions
+					if vim_item.abbr then
+						vim_item.abbr = vim_item.abbr:gsub("\r", "")
+					end
+					if vim_item.menu then
+						vim_item.menu = vim_item.menu:gsub("\r", "")
+					end
+					-- Apply NvChad's default formatting if it exists
+					local nvchad_format = config.formatting and config.formatting.format
+					if nvchad_format then
+						vim_item = nvchad_format(entry, vim_item)
+					end
+					return vim_item
+				end,
+			},
+		})
+	end,
+})
