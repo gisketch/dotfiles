@@ -12,7 +12,7 @@ return {
       padding = true,
       style = "fancy",
       top_down = false,
-      max_lines = 5,
+      max_lines = 3,
     },
     explorer = {
       replace_netrw = true,

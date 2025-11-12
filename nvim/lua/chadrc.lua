@@ -116,7 +116,7 @@ M.ui = {
           if path == "" then
             return ""
           end
-          local normalized = vim.fn.fnamemodify(path, ":p"):gsub("\\", "/"):lower()
+          local normalized = vim.fn.fnamemodify(path, ":p"):gsub("\\", "/")
           return normalized
         end
 
@@ -263,6 +263,10 @@ M.ui = {
     modules = {
       spc = " ",
       abc = function()
+        local recording_register = vim.fn.reg_recording()
+        if recording_register ~= "" then
+          return "󰑋 @" .. recording_register
+        end
         return require("triforce.lualine").streak()
       end,
       f = " %F ",

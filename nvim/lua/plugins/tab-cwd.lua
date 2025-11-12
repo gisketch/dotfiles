@@ -139,7 +139,7 @@ return {
 
             -- Change tab CWD only
             vim.cmd("tcd " .. vim.fn.fnameescape(project.path))
-            vim.notify('Changed tab CWD to "' .. choice .. '" → ' .. project.path, vim.log.levels.INFO)
+            -- vim.notify('Changed tab CWD to "' .. choice .. '" → ' .. project.path, vim.log.levels.INFO)
 
             -- After changing CWD, check for grapple index 1 or open explorer
             vim.schedule(function()

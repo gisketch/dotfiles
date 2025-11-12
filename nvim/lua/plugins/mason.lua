@@ -9,6 +9,13 @@ return {
                 },
                 ensure_installed = {
                     "roslyn",
+                    "ts_ls",       -- TypeScript/JavaScript
+                    "html",        -- HTML
+                    "cssls",       -- CSS
+                    "jsonls",      -- JSON
+                    "lua_ls",      -- Lua
+                    "pyright",     -- Python
+                    "tailwindcss", -- Tailwind CSS (useful for React)
                     -- "rzls"
                 },
                 ui = {

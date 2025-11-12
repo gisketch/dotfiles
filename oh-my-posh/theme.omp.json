@@ -40,7 +40,7 @@
           "background": "#a7c080",
           "foreground": "#272e33",
           "style": "plain",
-          "template": " {{ if .SSHSession }}\ueba9 {{ end }}{{ .UserName }}@{{ .HostName }} ",
+          "template": " {{ if .SSHSession }}\ueba9 {{ end }}glenn@netzon ",
           "type": "session"
         },
         {
