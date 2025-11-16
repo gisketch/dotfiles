@@ -1,19 +1,19 @@
 return {
   -- Add nvim-treesitter first
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    config = function()
-      local configs = require("nvim-treesitter.configs")
-      configs.setup({
-        ensure_installed = { "http", "json" }, -- kulala requires http parser
-        auto_install = true,
-        highlight = {
-          enable = true,
-        },
-      })
-    end,
-  },
+  -- {
+  --   "nvim-treesitter/nvim-treesitter",
+  --   build = ":TSUpdate",
+  --   config = function()
+  --     local configs = require("nvim-treesitter.configs")
+  --     configs.setup({
+  --       ensure_installed = { "http", "json" }, -- kulala requires http parser
+  --       auto_install = true,
+  --       highlight = {
+  --         enable = true,
+  --       },
+  --     })
+  --   end,
+  -- },
 
   -- kulala.nvim
   {

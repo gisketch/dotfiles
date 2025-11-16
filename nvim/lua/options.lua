@@ -114,7 +114,7 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 if vim.g.neovide then
-    vim.o.guifont = "JetBrainsMonoNL Nerd Font Propo:h13"
+    vim.o.guifont = "JetBrainsMonoNL Nerd Font Propo:h12"
     -- vim.g.neovide_scale_factor = 1.4
     vim.opt.linespace = 5
 
@@ -129,9 +129,9 @@ if vim.g.neovide then
     -- vim.g.neovide_floating_corner_radius = 0.5
 
     vim.g.neovide_floating_shadow = true
-    vim.g.neovide_floating_z_height = 15
+    vim.g.neovide_floating_z_height = 5
     vim.g.neovide_light_angle_degrees = 45
-    vim.g.neovide_light_radius = 20
+    vim.g.neovide_light_radius = 1
 
     vim.g.neovide_hide_mouse_when_typing = true
     vim.g.neovide_remember_window_size = true

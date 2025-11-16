@@ -3,7 +3,17 @@ local options = {
     lua = { "stylua" },
     css = { "prettier" },
     html = { "prettier" },
-    csharp = { "csharpier"}
+    csharp = { "csharpier" },
+  },
+
+  formatters = {
+    stylua = {
+      command = function()
+        return vim.fn.shellescape(
+          vim.fn.expand "$HOME" .. "/AppData/Local/nvim-data/mason/bin/stylua.CMD"
+        )
+      end,
+    },
   },
 
   -- format_on_save = {

@@ -45,3 +45,4 @@ function gam { git add @args }
 function gap { git add -p @args }
 function vim { neovide --frame none @args }
 
+pokemonshow

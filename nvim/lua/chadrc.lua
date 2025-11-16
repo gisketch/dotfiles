@@ -6,7 +6,8 @@
 local M = {}
 
 M.base46 = {
-  theme = "onedark",
+  theme = "anuppuccin",
+  theme_toggle = { "anuppuccin", "onedark" },
   hl_override = {
     FloatBorder = { fg = "darker_black", bg = "darker_black" },
     VertSplit = { fg = "black", bg = "black" },

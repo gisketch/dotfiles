@@ -1,6 +1,15 @@
 -- LSP Menu
 return {
   {
+    name = "󰒭 Code Actions",
+    cmd = function()
+      require("tiny-code-action").code_action()
+    end,
+    keybind = "c",
+    rtxt = "c",
+  },
+
+  {
     name = "󰒭 Go to Declaration",
     cmd = function()
       vim.lsp.buf.declaration()
