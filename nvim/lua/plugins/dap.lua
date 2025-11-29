@@ -24,6 +24,9 @@ return {
       local dap_view = require("dap-view")
       local dap_cs = require("dap-cs")
 
+      -- Force the terminal to open in a vertical split
+      dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
+
       -- Setup Virtual Text
       require("nvim-dap-virtual-text").setup({})
 
@@ -55,11 +58,14 @@ return {
       dap.adapters.coreclr = {
         type = 'executable',
         command = netcoredbg_path,
-        args = { '--interpreter=vscode' }
+        args = { '--interpreter=vscode' },
+        options = {
+          detached = false,
+        },
       }
-      
+
       -- We can skip dap_cs.setup since we are defining the adapter and configurations manually
-      -- dap_cs.setup(...) 
+      -- dap_cs.setup(...)
 
       -- Global .NET Configuration
       dap.configurations.cs = {
@@ -68,10 +74,30 @@ return {
           name = "Launch .NET App",
           request = "launch",
           program = function()
-            return vim.fn.input('Path to dll: ', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+            local cwd = vim.fn.getcwd()
+            local default_path = cwd .. '\\bin\\Debug\\'
+
+            -- Attempt to find the .dll based on the .csproj name
+            local csproj = vim.fn.glob(cwd .. '/*.csproj', false, true)
+            if #csproj > 0 then
+              local project_name = vim.fn.fnamemodify(csproj[1], ':t:r')
+              -- Find dlls, strictly looking in net* folders to avoid 'ref' folders or other artifacts
+              local found_dlls = vim.fn.glob(cwd .. '\\bin\\Debug\\net*\\' .. project_name .. '.dll', false, true)
+              
+              -- Filter out any results that might be in a 'ref' subfolder just in case
+              for _, path in ipairs(found_dlls) do
+                if not path:find("\\ref\\") and not path:find("/ref/") then
+                  default_path = path:gsub("/", "\\") -- Ensure Windows backslashes
+                  break
+                end
+              end
+            end
+
+            return vim.fn.input('Path to dll: ', default_path, 'file')
           end,
           cwd = "${workspaceFolder}",
           stopAtEntry = false,
+          console = "integratedTerminal",
           env = {
             ASPNETCORE_ENVIRONMENT = "Development",
           },
