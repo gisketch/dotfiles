@@ -6,7 +6,7 @@
       "segments": [
         {
           "background": "#7fbbb3",
-          "foreground": "#1e2326",
+          "foreground": "#272e33",
           "properties": {
             "style": "austin",
             "threshold": 321
@@ -24,28 +24,28 @@
         },
         {
           "background": "#dbbc7f",
-          "foreground": "#1e2326",
+          "foreground": "#272e33",
           "style": "plain",
           "template": "\uf0e7",
           "type": "root"
         },
         {
-          "background": "#a7c080",
+          "background": "#83c092",
           "foreground": "#272e33",
           "style": "plain",
           "template": " {{ if .WSL }}\uebcc {{ end }}{{.Icon}}",
           "type": "os"
         },
         {
-          "background": "#a7c080",
+          "background": "#83c092",
           "foreground": "#272e33",
           "style": "plain",
           "template": " {{ if .SSHSession }}\ueba9 {{ end }}glenn@netzon ",
           "type": "session"
         },
         {
-          "background": "#374145",
-          "foreground": "#d3c6aa",
+          "background": "#a7c080",
+          "foreground": "#272e33",
           "properties": {
             "folder_icon": "\u2026",
             "style": "mixed"
@@ -55,7 +55,7 @@
           "type": "path"
         },
         {
-          "background": "#e67e80",
+          "background": "#e69875",
           "foreground": "#272e33",
           "properties": {
             "branch_icon": "\ue725 ",
@@ -75,7 +75,7 @@
         },
         {
           "background": "#d699b6",
-          "foreground": "#1e2326",
+          "foreground": "#272e33",
           "properties": {
             "fetch_version": false
           },
@@ -84,8 +84,8 @@
           "type": "dotnet"
         },
         {
-          "background": "#83c092",
-          "foreground": "#1e2326",
+          "background": "#7fbbb3",
+          "foreground": "#272e33",
           "properties": {
             "fetch_version": false
           },
@@ -94,8 +94,8 @@
           "type": "go"
         },
         {
-          "background": "#d699b6",
-          "foreground": "#1e2326",
+          "background": "#dbbc7f",
+          "foreground": "#272e33",
           "properties": {
             "fetch_version": false
           },
@@ -104,8 +104,8 @@
           "type": "python"
         },
         {
-          "background": "#a7c080",
-          "foreground": "#1e2326",
+          "background": "#e67e80",
+          "foreground": "#272e33",
           "properties": {
             "fetch_version": false
           },
@@ -121,7 +121,7 @@
       "newline": true,
       "segments": [
         {
-          "foreground": "#7fbbb3",
+          "foreground": "#a7c080",
           "style": "plain",
           "template": "{{ .Name }} ",
           "type": "shell",

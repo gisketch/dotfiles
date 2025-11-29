@@ -114,9 +114,9 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 if vim.g.neovide then
-    vim.o.guifont = "JetBrainsMonoNL Nerd Font Propo:h12"
+    vim.o.guifont = "JetBrainsMonoNL Nerd Font Propo:h11"
     -- vim.g.neovide_scale_factor = 1.4
-    vim.opt.linespace = 5
+    vim.opt.linespace = 7
 
     -- Neovide title colors are now managed by the theme system
     -- See lua/plugins/colorscheme.lua for theme-specific color configurations

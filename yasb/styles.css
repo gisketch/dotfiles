@@ -17,9 +17,31 @@
 .media-widget {} -> Styles specific to the media widget
 .github-widget {} -> Styles specific to the github widget
 */
+
+/* Everforest Dark Palette:
+   bg_dim: #1e2326 (darker background)
+   bg0: #272e33 (background)
+   bg1: #2e383c (surface)
+   bg2: #374145
+   bg3: #414b50
+   bg4: #495156
+   bg5: #4f5b58
+   fg: #d3c6aa (foreground text)
+   red: #e67e80
+   orange: #e69875
+   yellow: #dbbc7f
+   green: #a7c080 (primary accent)
+   aqua: #83c092
+   blue: #7fbbb3
+   purple: #d699b6
+   grey0: #7a8478
+   grey1: #859289
+   grey2: #9da9a0
+*/
+
 * {
     font-size: 12px;
-    color: #abb2bf;
+    color: #d3c6aa;
 	font-weight: 600;
     font-family: "JetBrainsMono NFP";
     margin: 0;
@@ -28,17 +50,15 @@
 .yasb-bar {
     padding: 0 8px;
     margin: 0;
-    background-color: #282c34;
+    background-color: #2e383c;
 }
 .widget {
     padding: 0 8px;
     margin: 0;
 }
-
 .active-window-widget .icon {
     margin-right: 8px;
 }
-
 .glazewm-workspaces .widget-container {
     margin-left: 0px;
 }
@@ -48,131 +68,123 @@
     border-left: none
 }
 .glazewm-workspaces .offline-status {
-    color: var(--subtext1);
+    color: #7a8478;
     font-size: 12px;
     padding: 0 0px;
     font-weight: 600;
 }
 .glazewm-workspaces .ws-btn {
     border: none;
-    background-color: #3e4451;
+    background-color: #414b50;
     margin: 0 3px;
     width: 10px;
     height: 10px;
     border-radius: 5px;
-    color: #3e4451;
+    color: #414b50;
 }
 .glazewm-workspaces .ws-btn:hover {
-    color: #2c323c;
-    background-color: #2c323c;
+    color: #495156;
+    background-color: #495156;
 }
 .glazewm-workspaces .ws-btn.populated:hover {
     color: rgba(0, 0, 0, 0);
-    background-color: var(--overlay1);
+    background-color: #83c092;
 }
 .glazewm-workspaces .ws-btn.populated {
     color: rgba(0, 0, 0, 0);
-    background-color: #c678dd;
+    background-color: #859289;
 }
-
 .glazewm-workspaces .ws-btn.active_empty{
     color: rgba(0, 0, 0, 0);
-    background-color: #61afef;
+    background-color: #a7c080;
     width: 28px;
     height: 10px;
 }
-
 .glazewm-workspaces .ws-btn.active_populated{
     color: rgba(0, 0, 0, 0);
-    background-color: #61afef;
+    background-color: #a7c080;
     width: 28px;
     height: 10px;
 }
-
 .glazewm-tiling-direction {
     background-color: transparent;
     padding: 0;
     margin: 0;
     margin-left: 12px;
 }
-
 .glazewm-tiling-direction .btn {
     font-size: 18px;
     width: 14px;
     padding: 0 4px 0 4px;
-    color: #abb2bf;
+    color: #d3c6aa;
     border: none;
 }
-
 .glazewm-tiling-direction .btn:hover {
-    background-color: #4b5263;
+    background-color: #414b50;
 }
-
 /*POWER MENU WIDGET*/
 .uptime {
 	font-size: 14px;
 	margin-bottom: 10px;
-	color: #c678dd;
+	color: #d699b6;
 	font-weight: 600;
 	font-family: "Segoe UI";
 }
 .power-menu-widget .label {
-	color: #e06c75;
+	color: #d3c6aa;
 	font-size: 13px;
 }
 .power-menu-popup {
-	background-color: #21252b;
+	background-color: #272e33;
 	border-radius: 12px;
-	border: 4px solid #2c323c;
+	border: 4px solid #2e383c;
 }
 .power-menu-popup .button {
 	padding: 0;
 	width: 240px;
 	height: 120px;
 	border-radius: 8px;
-	background-color: #2c323c;
+	background-color: #374145;
 	font-family: "Segoe UI";
-	color: #61afef;
-	border: 1px solid #2c323c;
+	color: #a7c080;
+	border: 1px solid #374145;
 	margin: 8px;
 }
 .power-menu-popup .button.hover {
-	background-color: #282c34;
-	border: 1px solid #282c34;
+	background-color: #414b50;
+	border: 1px solid #414b50;
 }
 .power-menu-popup .button .label {
 	margin-bottom: 8px;
 	font-size: 16px;
 	font-weight: 600;
-	color: #61afef;
+	color: #a7c080;
 	font-family: "Segoe UI";
 }
 .power-menu-popup .button .icon {
 	font-size: 48px;
 	padding-top: 8px;
-	color: #61afef;
+	color: #a7c080;
 }
 .power-menu-popup .button.cancel .icon {
-	color: #e06c75;
+	color: #e67e80;
 }
 .power-menu-popup .button.cancel .label {
-	color: #e06c75;
+	color: #e67e80;
 }
 .power-menu-popup .button.shutdown .icon {
-	color: #61afef;
+	color: #a7c080;
 }
 .power-menu-popup .button.shutdown .label {
-	color: #61afef;
+	color: #a7c080;
 }
-
 /*ICONS*/
 .icon {
 	font-size: 16px;
 }
 .volume-widget .icon {
-	color: #c678dd;
+	color: #dbbc7f;
 }
-
 .cpu-widget .icon,
 .memory-widget .icon,
 .volume-widget .icon,
@@ -183,43 +195,39 @@
 .cpu-widget .icon,
 .memory-widget .icon {
 	font-size: 14px;
-	color: #61afef;
+	color: #7fbbb3;
 }
 .memory-widget .icon {
-	color: #c678dd;
+	color: #e69875;
 }
 .wifi-widget .icon {
     font-size: 14px;
-	color: #61afef;
+	color: #83c092;
 }
 .weather-widget .icon.sunnyDay {
-	color: #e5c07b;
+	color: #dbbc7f;
 }
-
 .weather-widget .label.sunnyDay {
-	color: #e5c07b;
+	color: #dbbc7f;
 }
 .weather-widget .icon.clearNight {
-	color: #61afef;
+	color: #7fbbb3;
 	font-size: 22px;
 	margin: 1px 2px 0px 0;
 }
-
 .apps-widget .widget-container{
-	background-color: #3e4451;
-	border: 1px solid #3e4451;
+	background-color: #374145;
+	border: 1px solid #374145;
 	border-radius: 15px;
 }
-
 .apps-widget {
     padding: 2px 0px 0px 4px;
 }
 .apps-widget .label {
     font-size: 12px;
     padding: 0 3px;
-    color: #61afef;
+    color: #a7c080;
 }
-
 /* MEDIA WIDGET */
 .media-widget {
 	padding: 0;
@@ -229,37 +237,36 @@
 	margin-right: 8px;
 }
 .media-widget .label {
-	background-color: #1e212700;
+	background-color: #2e383c00;
 }
 .media-widget .btn {
-	color: #c678dd;
+	color: #dbbc7f;
 	padding: 0 3px;
 	margin: 4px 0;
 	font-family: Segoe Fluent Icons;
 }
 .media-widget .btn:hover {
-	color: #61afef;
+	color: #d3c6aa;
 }
 .media-widget .btn.play {
-	background-color: #282c34;
+	background-color: #2e383c;
 	border-radius: 12px;
 	font-size: 14px;
 }
 .media-widget .btn.disabled:hover,
 .media-widget .btn.disabled {
-	color: #282c34;
+	color: #414b50;
 	font-size: 12px;
-	background-color: #282c34;
+	background-color: #2e383c;
 }
-
 /*CALENDAR AND VOLUME SLIDER*/
 .calendar {
-    background-color: #282c34
+    background-color: #2e383c
 }
 .calendar .calendar-table,
 .calendar .calendar-table::item {
-    background-color: rgba(17, 17, 27, 0);
-    color: #61afef;
+    background-color: rgba(46, 56, 60, 0);
+    color: #d3c6aa;
     font-family: 'Segoe UI';
     margin: 0;
     padding: 0;
@@ -267,9 +274,9 @@
     outline: none;
 }
 .calendar .calendar-table::item:selected {
-    color: #e5c07b;
-	border: 2px solid #2c323c;
-	background-color: #2c323c;
+    color: #272e33;
+	border: 2px solid #a7c080;
+	background-color: #a7c080;
 	border-radius: 10px;
 }
 .calendar .day-label {
@@ -280,7 +287,7 @@
 .calendar .date-label {
     font-family: 'Segoe UI';
     font-size: 16px;
-    color: #abb2bf;
+    color: #d3c6aa;
     font-weight: 700;
     min-width: 180px;
     max-width: 180px;
@@ -291,22 +298,20 @@
 .calendar .date-label {
     font-size: 88px;
     font-weight: 900;
-    color: #abb2bf;
+    color: #d3c6aa;
     margin-top: -20px;
 }
-
 .volume-slider {
     border: none;
 }
-
 .volume-slider::handle{
-	color: #c678dd;
-	border: 1px solid #c678dd;
+	color: #dbbc7f;
+	border: 1px solid #dbbc7f;
 	border-radius: 7px;
-	background-color: #c678dd;
+	background-color: #dbbc7f;
 }
 .audio-menu {
-    background-color: #282c34;
+    background-color: #2e383c;
 }
 .audio-container .device {
     background-color:transparent;
@@ -317,8 +322,8 @@
     border-radius: 4px;
 }
 .audio-container .device.selected {
-    background-color: #3e4451;
+    background-color: #374145;
 }
 .audio-container .device:hover {
-    background-color: #2c323c;
+    background-color: #414b50;
 }
