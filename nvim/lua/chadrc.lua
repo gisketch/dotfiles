@@ -46,6 +46,7 @@ M.base46 = {
 
     -- DAP Highlights
     DapBreakpoint = { fg = "red" }, -- Red
+    DapBreakpointLine = { bg = {"red", "darker_black", 85} },
     DapBreakpointCondition = { fg = "yellow" }, -- Yellow
     DapLogPoint = { fg = "blue" }, -- Blue
     DapStopped = { fg = "green" }, -- Green

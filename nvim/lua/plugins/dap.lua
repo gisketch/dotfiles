@@ -29,11 +29,11 @@ return {
 
       -- Setup Icons
       local signs = {
-        DapBreakpoint = { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "" },
-        DapBreakpointCondition = { text = "", texthl = "DapBreakpointCondition", linehl = "", numhl = "" },
-        DapLogPoint = { text = "", texthl = "DapLogPoint", linehl = "", numhl = "" },
+        DapBreakpoint = { text = "", texthl = "DapBreakpoint", linehl = "DapBreakpointLine", numhl = "DapBreakpoint" },
+        DapBreakpointCondition = { text = "", texthl = "DapBreakpointCondition", linehl = "", numhl = "DapBreakpointCondition" },
+        DapLogPoint = { text = "", texthl = "DapLogPoint", linehl = "", numhl = "DapLogPoint" },
         DapStopped = { text = "", texthl = "DapStopped", linehl = "DapStoppedLine", numhl = "DapStopped" },
-        DapBreakpointRejected = { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "" },
+        DapBreakpointRejected = { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "DapBreakpointRejected" },
       }
 
       for name, sign in pairs(signs) do
@@ -48,9 +48,9 @@ return {
       -- 2. Setup C# Adapter (nvim-dap-cs)
       -- This automatically finds 'netcoredbg' if installed via Mason.
       dap_cs.setup({
-        netcoredbg = {
-          path = "C:\\Users\\gisketch\\AppData\\Local\\nvim-data\\mason\\packages\\netcoredbg\\netcoredbg\\netcoredbg.exe"
-        }
+        -- netcoredbg = {
+        --   path = "C:\\Users\\gisketch\\AppData\\Local\\nvim-data\\mason\\packages\\netcoredbg\\netcoredbg\\netcoredbg.exe"
+        -- }
       })
 
       -- Add specific configuration for TestDebugApi
