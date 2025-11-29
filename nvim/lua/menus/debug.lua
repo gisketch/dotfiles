@@ -1,7 +1,7 @@
 -- Debug Menu (DAP)
 return {
   {
-    name = " Continue",
+    name = " Start/Continue",
     cmd = function()
       require("dap").continue()
     end,

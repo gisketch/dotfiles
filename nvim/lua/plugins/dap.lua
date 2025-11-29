@@ -46,22 +46,45 @@ return {
       })
 
       -- 2. Setup C# Adapter (nvim-dap-cs)
-      -- This automatically finds 'netcoredbg' if installed via Mason.
-      dap_cs.setup({
-        -- netcoredbg = {
-        --   path = "C:\\Users\\gisketch\\AppData\\Local\\nvim-data\\mason\\packages\\netcoredbg\\netcoredbg\\netcoredbg.exe"
-        -- }
-      })
+      local netcoredbg_path = vim.fn.stdpath("data") .. "/mason/packages/netcoredbg/netcoredbg/netcoredbg.exe"
+      if vim.fn.has("win32") == 1 then
+        netcoredbg_path = netcoredbg_path:gsub("/", "\\")
+      end
 
-      -- Add specific configuration for TestDebugApi
-      dap.configurations.cs = dap.configurations.cs or {}
+      -- Manual adapter setup to ensure correct arguments
+      dap.adapters.coreclr = {
+        type = 'executable',
+        command = netcoredbg_path,
+        args = { '--interpreter=vscode' }
+      }
+      
+      -- We can skip dap_cs.setup since we are defining the adapter and configurations manually
+      -- dap_cs.setup(...) 
 
-      table.insert(dap.configurations.cs, {
-        type = "coreclr",
-        name = "Attach to Process",
-        request = "attach",
-        processId = require('dap.utils').pick_process,
-      })
+      -- Global .NET Configuration
+      dap.configurations.cs = {
+        {
+          type = "coreclr",
+          name = "Launch .NET App",
+          request = "launch",
+          program = function()
+            return vim.fn.input('Path to dll: ', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+          end,
+          cwd = "${workspaceFolder}",
+          stopAtEntry = false,
+          env = {
+            ASPNETCORE_ENVIRONMENT = "Development",
+          },
+          justMyCode = false, -- Ensure we can debug non-user code if needed
+        },
+        {
+          type = "coreclr",
+          name = "Attach to Process",
+          request = "attach",
+          processId = require('dap.utils').pick_process,
+          justMyCode = false,
+        },
+      }
 
       -- 3. Optional: Auto-open the View when debugging starts
       dap.listeners.after.event_initialized["dap_view_config"] = function()
