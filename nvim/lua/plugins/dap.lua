@@ -6,6 +6,7 @@ return {
     dependencies = {
       "igorlfs/nvim-dap-view", -- The UI you requested
       "NicholasMata/nvim-dap-cs", -- C# Adapter
+      "theHamsta/nvim-dap-virtual-text", -- Virtual Text
     },
     -- basic keymaps for debugging
     keys = {
@@ -23,6 +24,22 @@ return {
       local dap_view = require("dap-view")
       local dap_cs = require("dap-cs")
 
+      -- Setup Virtual Text
+      require("nvim-dap-virtual-text").setup({})
+
+      -- Setup Icons
+      local signs = {
+        DapBreakpoint = { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "" },
+        DapBreakpointCondition = { text = "", texthl = "DapBreakpointCondition", linehl = "", numhl = "" },
+        DapLogPoint = { text = "", texthl = "DapLogPoint", linehl = "", numhl = "" },
+        DapStopped = { text = "", texthl = "DapStopped", linehl = "DapStoppedLine", numhl = "DapStopped" },
+        DapBreakpointRejected = { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "" },
+      }
+
+      for name, sign in pairs(signs) do
+        vim.fn.sign_define(name, sign)
+      end
+
       -- 1. Setup nvim-dap-view
       dap_view.setup({
         -- winbar = { show = true }, -- Enable if you want the view controls in the window bar
@@ -30,9 +47,21 @@ return {
 
       -- 2. Setup C# Adapter (nvim-dap-cs)
       -- This automatically finds 'netcoredbg' if installed via Mason.
-      -- If installed manually, you might need to specify the path:
-      -- dap_cs.setup({ netcoredbg = { path = '/usr/bin/netcoredbg' } })
-      dap_cs.setup({})
+      dap_cs.setup({
+        netcoredbg = {
+          path = "C:\\Users\\gisketch\\AppData\\Local\\nvim-data\\mason\\packages\\netcoredbg\\netcoredbg\\netcoredbg.exe"
+        }
+      })
+
+      -- Add specific configuration for TestDebugApi
+      dap.configurations.cs = dap.configurations.cs or {}
+
+      table.insert(dap.configurations.cs, {
+        type = "coreclr",
+        name = "Attach to Process",
+        request = "attach",
+        processId = require('dap.utils').pick_process,
+      })
 
       -- 3. Optional: Auto-open the View when debugging starts
       dap.listeners.after.event_initialized["dap_view_config"] = function()

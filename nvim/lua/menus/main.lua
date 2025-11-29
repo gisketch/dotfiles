@@ -95,6 +95,13 @@ return {
     keybind = "l",
     rtxt = "l",
   },
+  {
+    name = " Debug",
+    hl = "ExRed",
+    items = "debug",
+    keybind = "d",
+    rtxt = "d",
+  },
   { name = "separator" },
   {
     name = "󰆼 Query Database",
@@ -102,6 +109,6 @@ return {
     cmd = function()
       vim.cmd("DBUI")
     end,
-    rtxt = "d",
+    rtxt = "D",
   },
 }

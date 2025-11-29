@@ -14,8 +14,6 @@ map({ "n", "x" }, "<leader>f", function()
   require("conform").format { lsp_fallback = true }
 end, { desc = "general format file" })
 
--- global lsp mappings
-map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "LSP diagnostic loclist" })
 
 -- Comment
 map("n", "<leader>/", "gcc", { desc = "toggle comment", remap = true })

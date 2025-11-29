@@ -43,6 +43,13 @@ M.base46 = {
     SnacksNotifierError = { bg = "darker_black" },
     SnacksNotifierTrace = { bg = "darker_black" },
     NoiceCmdlinePopupBorder = { bg = "darker_black", fg = "darker_black" },
+
+    -- DAP Highlights
+    DapBreakpoint = { fg = "red" }, -- Red
+    DapBreakpointCondition = { fg = "yellow" }, -- Yellow
+    DapLogPoint = { fg = "blue" }, -- Blue
+    DapStopped = { fg = "green" }, -- Green
+    DapStoppedLine = { bg = {"green", "darker_black", 85} },
   },
 }
 

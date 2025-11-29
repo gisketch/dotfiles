@@ -28,6 +28,10 @@ return {
       require("menu").open "http"
     end, { desc = "Open HTTP menu" })
 
+    vim.keymap.set({ "n", "v" }, "<leader>d", function()
+      require("menu").open "debug"
+    end, { desc = "Open Debug menu" })
+
     -- Optional: Right-click context menu
     vim.keymap.set({ "n", "v" }, "<RightMouse>", function()
       vim.cmd.exec '"normal! \\<RightMouse>"'
