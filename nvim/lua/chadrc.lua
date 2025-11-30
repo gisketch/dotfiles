@@ -45,12 +45,31 @@ M.base46 = {
     NoiceCmdlinePopupBorder = { bg = "darker_black", fg = "darker_black" },
 
     -- DAP Highlights
-    DapBreakpoint = { fg = "red" }, -- Red
-    DapBreakpointLine = { bg = {"red", "darker_black", 85} },
+    DapBreakpoint = { fg = "red" },             -- Red
+    DapBreakpointLine = { bg = { "red", "darker_black", 85 } },
     DapBreakpointCondition = { fg = "yellow" }, -- Yellow
-    DapLogPoint = { fg = "blue" }, -- Blue
-    DapStopped = { fg = "green" }, -- Green
-    DapStoppedLine = { bg = {"green", "darker_black", 85} },
+    DapLogPoint = { fg = "blue" },              -- Blue
+    DapStopped = { fg = "green" },              -- Green
+    DapStoppedLine = { bg = { "green", "darker_black", 85 } },
+
+    -- Neotest Highlights
+    NeotestDir = { fg = "blue" },      -- Cyan
+    NeotestFile = { fg = "blue" },     -- Cyan
+    NeotestTest = { fg = "white" },     -- White/Text
+    NeotestFailed = { fg = "red" },   -- Red
+    NeotestIndent = { fg = "grey" },   -- Grey
+    NeotestMarked = { fg = "orange" },   -- Orange
+    NeotestPassed = { fg = "green" },   -- Green
+    NeotestTarget = { fg = "pink" },   -- Red/Pink
+    NeotestFocused = { bold = true, underline = false, bg = { "darker_black", "green", 15 } },
+    NeotestRunning = { fg = "yellow" },  -- Yellow
+    NeotestSkipped = { fg = "blue" },  -- Blue
+    NeotestUnknown = { fg = "grey" },  -- Grey
+    NeotestWatching = { fg = "yellow" }, -- Yellow
+    NeotestNamespace = { fg = "purple" }, -- Purple
+    NeotestWinSelect = { fg = "cyan" }, -- Bright Cyan
+    NeotestAdapterName = { fg = "red" }, -- Red
+    NeotestExpandMarker = { fg = "grey" }, -- Grey
   },
 }
 
@@ -218,11 +237,11 @@ M.ui = {
 
           -- Build the tab
           local content = string.rep(" ", pad - 1)
-            .. icon_hl
-            .. icon
-            .. modified_indicator
-            .. txt(name, tbHlName)
-            .. string.rep(" ", pad - 1)
+              .. icon_hl
+              .. icon
+              .. modified_indicator
+              .. txt(name, tbHlName)
+              .. string.rep(" ", pad - 1)
 
           if index then
             -- Grapple file: add index number and make it clickable

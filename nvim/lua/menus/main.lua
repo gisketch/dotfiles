@@ -102,6 +102,13 @@ return {
     keybind = "d",
     rtxt = "d",
   },
+  {
+    name = "󰙨 Testing",
+    hl = "ExBlue",
+    items = "testing",
+    keybind = "x",
+    rtxt = "x",
+  },
   { name = "separator" },
   {
     name = "󰆼 Query Database",

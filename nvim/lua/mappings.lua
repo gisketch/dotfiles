@@ -70,8 +70,10 @@ map("n", "<leader>j", "<cmd>lprev<CR>zz")
 -- Search and replace
 map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]])
 
--- File permissions
-map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+-- Testing Menu
+map("n", "<leader>x", function()
+  require("menu").open "testing"
+end, { desc = "Open testing menu" })
 
 -- Paste
 map("", "<C-S-v>", '"+p', { noremap = true, silent = true })

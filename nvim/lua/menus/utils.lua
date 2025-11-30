@@ -31,4 +31,15 @@ return {
     keybind = "h",
     rtxt = "h",
   },
+  {
+    name = "  Toggle Transparency",
+    cmd = function()
+      local nvconfig = require "nvconfig"
+      nvconfig.base46.transparency = not nvconfig.base46.transparency
+      require("base46").load_all_highlights()
+      vim.notify("Transparency: " .. (nvconfig.base46.transparency and "ON" or "OFF"))
+    end,
+    keybind = "T",
+    rtxt = "T",
+  },
 }
