@@ -140,5 +140,8 @@ if vim.g.neovide then
     vim.g.neovide_cursor_trail_size = 0.05
 
     vim.g.neovide_scroll_animation_length = 0.05
+
+    -- vim.g.transparency = 0.9
+    -- vim.g.neovide_opacity = 0.97
 end
 

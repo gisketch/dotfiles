@@ -6,8 +6,8 @@
 local M = {}
 
 M.base46 = {
-  theme = "everforest",
-  theme_toggle = { "everforest", "everforest" },
+  theme = "rosepine",
+  theme_toggle = { "rosepine", "rosepine" },
   hl_override = {
     FloatBorder = { fg = "darker_black", bg = "darker_black" },
     VertSplit = { fg = "black", bg = "black" },
