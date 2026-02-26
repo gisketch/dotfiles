@@ -1,5 +1,26 @@
 require "nvchad.autocmds"
 
+if vim.env.TMUX then
+	local focus_group = vim.api.nvim_create_augroup("tmux_single_statusline", { clear = true })
+
+	vim.api.nvim_create_autocmd({ "FocusLost", "VimSuspend" }, {
+		group = focus_group,
+		callback = function()
+			vim.g._tmux_laststatus = vim.o.laststatus
+			vim.o.laststatus = 0
+			vim.cmd("redrawstatus")
+		end,
+	})
+
+	vim.api.nvim_create_autocmd({ "FocusGained", "VimResume" }, {
+		group = focus_group,
+		callback = function()
+			vim.o.laststatus = vim.g._tmux_laststatus or 3
+			vim.cmd("redrawstatus")
+		end,
+	})
+end
+
 -- Clear all buffers on startup
 vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function()

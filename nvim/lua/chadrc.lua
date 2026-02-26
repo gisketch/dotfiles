@@ -287,9 +287,54 @@ M.ui = {
   statusline = {
     theme = "default",
     separator_style = "default",
-    order = { "mode", "f", "git", "%=", "lsp_msg", "%=", "lsp", "cwd", "spc", "abc", "spc" },
+    order = { "mode", "f", "git", "tmux_windows", "%=", "lsp_msg", "%=", "lsp", "cwd", "tmux_session", "tmux_datetime", "spc", "abc", "spc" },
     modules = {
       spc = " ",
+      tmux_windows = function()
+        local ok, tmux_status = pcall(require, "tmux-status")
+        if not ok then
+          return ""
+        end
+        local can_show, show = pcall(tmux_status.show)
+        if not can_show or not show then
+          return ""
+        end
+        local ok_windows, windows = pcall(tmux_status.tmux_windows)
+        if not ok_windows or type(windows) ~= "string" then
+          return ""
+        end
+        return "   " .. windows .. " "
+      end,
+      tmux_session = function()
+        local ok, tmux_status = pcall(require, "tmux-status")
+        if not ok then
+          return ""
+        end
+        local can_show, show = pcall(tmux_status.show)
+        if not can_show or not show then
+          return ""
+        end
+        local ok_session, session = pcall(tmux_status.tmux_session)
+        if not ok_session or type(session) ~= "string" then
+          return ""
+        end
+        return " " .. session .. " "
+      end,
+      tmux_datetime = function()
+        local ok, tmux_status = pcall(require, "tmux-status")
+        if not ok then
+          return ""
+        end
+        local can_show, show = pcall(tmux_status.show)
+        if not can_show or not show then
+          return ""
+        end
+        local ok_datetime, datetime = pcall(tmux_status.tmux_datetime)
+        if not ok_datetime or type(datetime) ~= "string" then
+          return ""
+        end
+        return " " .. datetime .. " "
+      end,
       abc = function()
         local recording_register = vim.fn.reg_recording()
         if recording_register ~= "" then
