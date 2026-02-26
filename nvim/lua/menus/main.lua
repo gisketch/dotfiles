@@ -109,6 +109,13 @@ return {
     keybind = "x",
     rtxt = "x",
   },
+  {
+    name = "󰙵 Resu AI Review",
+    hl = "ExYellow",
+    items = "resu",
+    keybind = "R",
+    rtxt = "R",
+  },
   { name = "separator" },
   {
     name = "󰆼 Query Database",

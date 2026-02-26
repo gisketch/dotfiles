@@ -32,6 +32,10 @@ return {
       require("menu").open "debug"
     end, { desc = "Open Debug menu" })
 
+    vim.keymap.set("n", "<leader>r", function()
+      require("menu").open "resu"
+    end, { desc = "Open Resu AI review menu" })
+
     -- Optional: Right-click context menu
     vim.keymap.set({ "n", "v" }, "<RightMouse>", function()
       vim.cmd.exec '"normal! \\<RightMouse>"'

@@ -56,11 +56,11 @@ M.base_16 = {
   base08 = "#8a8a8a", -- Variables, XML Tags (Forced Gray)
   base09 = "#a3a3a3", -- Integers, Boolean, Constants (Forced Gray)
   base0A = "#8a8a8a", -- Classes, Types (Forced Gray)
-  base0B = "#738c7a", -- Strings (Desaturated Green)
+  base0B = "#a3a3a3", -- Strings (Forced Gray)
   base0C = "#8a8a8a", -- Support, Regex (Forced Gray)
   base0D = "#d4d4d4", -- Functions, Methods (Bright Gray/White)
   base0E = "#737373", -- Keywords, Storage, Selectors (Dark Gray)
-  base0F = "#8c7373", -- Deprecated / Syntax Errors (Desaturated Red)
+  base0F = "#737373", -- Deprecated / Syntax Errors (Forced Gray)
 }
 
 M.type = "dark"
@@ -89,11 +89,22 @@ M.polish_hl = {
     Type = { fg = M.base_16.base0A, bold = true },
     Structure = { fg = M.base_16.base0A, bold = true },
 
-    -- Data/Strings
+    -- Data/Strings/Booleans (Legacy)
     String = { fg = M.base_16.base0B, italic = true },
     Constant = { fg = M.base_16.base09, italic = true },
     Number = { fg = M.base_16.base09 },
-    Boolean = { fg = M.base_16.base0B, bold = true }, -- Booleans share green
+    Boolean = { fg = M.base_16.base09, bold = true },
+
+    -- Explicit Treesitter Overrides (Kills the purple booleans)
+    ["@boolean"] = { fg = M.base_16.base09, bold = true },
+    ["@constant.builtin"] = { fg = M.base_16.base09, bold = true },
+    ["@number"] = { fg = M.base_16.base09 },
+    ["@string"] = { fg = M.base_16.base0B, italic = true },
+
+    -- Brackets and Punctuation explicitly grayed out
+    ["@punctuation.bracket"] = { fg = M.base_30.grey_fg },
+    ["@punctuation.delimiter"] = { fg = M.base_30.grey_fg },
+    ["@punctuation.special"] = { fg = M.base_30.grey_fg },
 
     -- Comments (Receded)
     Comment = { fg = M.base_16.base03, italic = true },
