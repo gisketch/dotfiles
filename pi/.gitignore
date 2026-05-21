@@ -1,0 +1,38 @@
+# Pi auth and local runtime state
+auth.json
+sessions/
+
+# Dependency installs
+node_modules/
+**/node_modules/
+
+# Logs, caches, temp files
+*.log
+logs/
+.cache/
+cache/
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Environment and private key material
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build outputs
+build/
+dist/
+coverage/

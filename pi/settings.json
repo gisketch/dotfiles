@@ -1,0 +1,17 @@
+{
+  "lastChangelogVersion": "0.75.1",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.5",
+  "defaultThinkingLevel": "xhigh",
+  "packages": [
+    "npm:pi-web-access",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@juicesharp/rpiv-todo",
+    "npm:@juicesharp/rpiv-btw",
+    "npm:pi-lean-ctx",
+    "npm:@narumitw/pi-goal",
+    "npm:@juanibiapina/pi-plan",
+    "npm:pi-serena-tools",
+    "npm:@narumitw/pi-codex-usage"
+  ]
+}

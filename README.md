@@ -42,6 +42,8 @@ rotz link
 ## What's Included
 
 - **nvim** - Neovim configuration
+- **herdr** - Herdr terminal/session UI configuration (runtime state excluded)
+- **pi** - Pi agent settings, extension package manifest, Herdr integration, and custom skills (auth/sessions excluded)
 
 ## What This Does
 
